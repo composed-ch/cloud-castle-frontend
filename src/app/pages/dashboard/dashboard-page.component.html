@@ -1,0 +1,16 @@
+<h2>My Virtual Machines</h2>
+
+<div class="vm-grid">
+  <mat-card *ngFor="let vm of vms" class="vm-card">
+    <mat-card-title>{{ vm.name }}</mat-card-title>
+    <mat-card-content>
+      <p><strong>Status:</strong> {{ vm.status }}</p>
+      <p><strong>IP:</strong> {{ vm.ip }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="start(vm)" [disabled]="vm.status === 'running'">Start</button>
+      <button mat-button color="warn" (click)="stop(vm)" [disabled]="vm.status === 'stopped'">Stop</button>
+      <button mat-button (click)="sync(vm)">Sync</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
