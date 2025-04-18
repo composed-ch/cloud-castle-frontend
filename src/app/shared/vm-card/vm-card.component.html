@@ -1,0 +1,26 @@
+<mat-card class="vm-card">
+  <mat-card-header>
+    <mat-card-title>{{ vm.name }}</mat-card-title>
+    <mat-card-subtitle>IP: {{ vm.ip }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <img mat-card-image src="images/terminal.svg" alt="Terminal Icon" class="card-image" />
+
+  <mat-card-content>
+    <mat-chip [ngClass]="vm.state.toLocaleLowerCase()">
+      {{ vm.state | uppercase }}
+    </mat-chip>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-icon-button matTooltip="Start VM" aria-label="Start VM" (click)="start()">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Stop VM" aria-label="Stop VM" (click)="stop()">
+      <mat-icon>stop</mat-icon>
+    </button>
+    <button mat-icon-button matTooltip="Sync VM state" aria-label="Sync VM state" (click)="sync()">
+      <mat-icon>sync</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

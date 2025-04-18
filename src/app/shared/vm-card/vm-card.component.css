@@ -1,0 +1,53 @@
+.vm-card {
+  min-width: 240px;
+  padding: 20px;
+}
+
+mat-card-header {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+mat-card-content {
+  margin: auto;
+}
+
+.card-image {
+  max-height: 120px;
+  object-fit: contain;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 1rem;
+
+  button {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+
+  mat-icon {
+    font-size: 28px;
+  }
+}
+
+mat-chip {
+
+  &.running,
+  &.starting {
+    background-color: #c3e9d0;
+    color: #256029;
+    border: 1px solid #256029;
+  }
+
+  &.stopped,
+  &.error {
+    background-color: #e9c3c3;
+    color: #792f2f;
+    border: 1px solid #792f2f;
+  }
+}
