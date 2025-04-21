@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VmService } from '../../core/services/vm.service';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-
 import { VmCardComponent } from '../../shared/vm-card/vm-card.component';
 import { Vm } from '../../core/models/vm.model';
 
@@ -21,7 +17,7 @@ import { Vm } from '../../core/models/vm.model';
 export class DashboardPageComponent implements OnInit {
   vms: Vm[] = [];
 
-  constructor(private vmService: VmService) {}
+  constructor(private vmService: VmService) { }
 
   ngOnInit() {
     this.vmService.getVms().subscribe(data => this.vms = data);
