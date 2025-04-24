@@ -41,13 +41,11 @@ mat-chip {
   &.starting {
     background-color: #c3e9d0;
     color: #256029;
-    border: 1px solid #256029;
   }
 
   &.stopped,
   &.error {
     background-color: #e9c3c3;
     color: #792f2f;
-    border: 1px solid #792f2f;
   }
 }
