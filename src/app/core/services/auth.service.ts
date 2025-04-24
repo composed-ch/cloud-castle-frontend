@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private readonly apiUrl = 'http://localhost:3000/api/auth/login';
+  // private readonly apiUrl = 'http://localhost:3000/api/auth/login';
+  private readonly apiUrl = 'http://localhost:8080/login';
 
   constructor(private http: HttpClient) { }
 
