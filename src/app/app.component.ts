@@ -3,6 +3,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { AuthService } from './core/services/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
     RouterOutlet,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDividerModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -23,7 +25,7 @@ export class AppComponent {
   title = 'Composed Cloud Castle';
   currentYear = new Date().getFullYear();
 
-  constructor(public auth: AuthService, private router: Router) {}
+  constructor(public auth: AuthService, private router: Router) { }
 
   logout() {
     this.auth.logout();
