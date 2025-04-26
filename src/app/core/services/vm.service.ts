@@ -1,16 +1,35 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Vm } from '../models/vm.model';
-import { State } from '../models/state.enum';
+import { Observable, map, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Vm } from '../../core/models/vm.model';
+import { mapVm, mapVms } from '../mappers/vm.mapper';
+import { environment } from '../../../environments/environment';
+
+import { vmTestData } from '../../core/testdata/vms';
 
 @Injectable({ providedIn: 'root' })
 export class VmService {
-  getVms(): Observable<Vm[]> {
-    return of([
-      { name: 'VM-01', state: State.Running, ip: '192.168.1.10' },
-      { name: 'VM-02', state: State.Stopped, ip: '192.168.1.11' },
-      { name: 'VM-03', state: State.Starting, ip: '192.168.1.12' },
-      { name: 'VM-04', state: State.Error, ip: '192.168.1.13' }
-    ]);
+
+  constructor(private http: HttpClient) { }
+
+  getVms(simulate: boolean = false): Observable<Vm[]> {
+    const data$ = simulate ? of(vmTestData) : this.http.get<any[]>(`${environment.backendUrl}/instances`);
+    return data$.pipe(
+      map(mapVms)
+    );
+  }
+
+  sync(id: string): Observable<Vm> {
+    return this.http.get<any>(`${environment.backendUrl}/instance/${id}/state`).pipe(
+      map(mapVm)
+    );
+  }
+
+  start(id: string): Observable<any> {
+    return this.http.get(`${environment.backendUrl}/instance/${id}/start`);
+  }
+
+  stop(id: string): Observable<any> {
+    return this.http.get(`${environment.backendUrl}/instance/${id}/stop`);
   }
 }

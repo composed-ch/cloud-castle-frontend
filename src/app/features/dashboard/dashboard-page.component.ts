@@ -3,35 +3,37 @@ import { CommonModule } from '@angular/common';
 import { VmService } from '../../core/services/vm.service';
 import { VmCardComponent } from '../../shared/vm-card/vm-card.component';
 import { Vm } from '../../core/models/vm.model';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-dashboard-page',
   standalone: true,
   imports: [
     CommonModule,
-    VmCardComponent
+    VmCardComponent,
+    MatSlideToggleModule
   ],
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.css']
 })
 export class DashboardPageComponent implements OnInit {
+  simulateRequest = true;
   vms: Vm[] = [];
 
   constructor(private vmService: VmService) { }
 
   ngOnInit() {
-    this.vmService.getVms().subscribe(data => this.vms = data);
+    this.loadVms();
   }
 
-  start(vm: Vm) {
-    console.log(`Start ${vm.name}`);
+  loadVms() {
+    this.vmService.getVms(this.simulateRequest).subscribe(data => {
+      this.vms = data;
+    });
   }
 
-  stop(vm: Vm) {
-    console.log(`Stop ${vm.name}`);
-  }
-
-  sync(vm: Vm) {
-    console.log(`Sync ${vm.name}`);
+  toggleDataSource() {
+    this.simulateRequest = !this.simulateRequest;
+    this.loadVms();
   }
 }

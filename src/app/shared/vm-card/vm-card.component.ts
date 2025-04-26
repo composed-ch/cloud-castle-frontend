@@ -6,7 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { VmService } from '../../core/services/vm.service';
 import { Vm } from '../../core/models/vm.model';
+import { mapVm } from '../../core/mappers/vm.mapper';
 
 @Component({
   selector: 'app-vm-card',
@@ -25,15 +27,24 @@ import { Vm } from '../../core/models/vm.model';
 export class VmCardComponent {
   @Input() vm!: Vm;
 
+  constructor(private vmService: VmService) { }
+
   start() {
-    console.log(`Start ${this.vm.name}`);
+    this.vmService.start(this.vm.id).subscribe(() => {
+      console.log(`Start command sent for ${this.vm.name}`);
+    });
   }
 
   stop() {
-    console.log(`Stop ${this.vm.name}`);
+    this.vmService.stop(this.vm.id).subscribe(() => {
+      console.log(`Stop command sent for ${this.vm.name}`);
+    });
   }
 
   sync() {
-    console.log(`Sync ${this.vm.name}`);
+    this.vmService.sync(this.vm.id).subscribe((data: any) => {
+      console.log(`VM state synced for ${this.vm.name}`, data);
+      this.vm = mapVm(data);
+    });
   }
 }
