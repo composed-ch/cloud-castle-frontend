@@ -8,7 +8,11 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Password</mat-label>
-    <input matInput type="password" formControlName="password" required>
+    <input matInput required [type]="showPassword ? 'text' : 'password'" formControlName="password">
+    <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()"
+      [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="!showPassword">
+      <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
