@@ -6,6 +6,7 @@ import { mapVm, mapVms } from '../mappers/vm.mapper';
 import { environment } from '../../../environments/environment';
 
 import { vmTestData } from '../../core/testdata/vms';
+import { State } from '../models/state.enum';
 
 @Injectable({ providedIn: 'root' })
 export class VmService {
@@ -19,17 +20,19 @@ export class VmService {
     );
   }
 
-  sync(id: string): Observable<Vm> {
-    return this.http.get<any>(`${environment.backendUrl}/instance/${id}/state`).pipe(
-      map(mapVm)
+  sync(id: string): Observable<{ state: State }> {
+    return this.http.get<{ state: string }>(`${environment.backendUrl}/instance/${id}/state`).pipe(
+      map(response => ({
+        state: response.state as State
+      }))
     );
   }
 
-  start(id: string): Observable<any> {
-    return this.http.get(`${environment.backendUrl}/instance/${id}/start`);
+  start(id: string): Observable<void> {
+    return this.http.get<void>(`${environment.backendUrl}/instance/${id}/start`);
   }
 
-  stop(id: string): Observable<any> {
-    return this.http.get(`${environment.backendUrl}/instance/${id}/stop`);
+  stop(id: string): Observable<void> {
+    return this.http.get<void>(`${environment.backendUrl}/instance/${id}/stop`);
   }
 }

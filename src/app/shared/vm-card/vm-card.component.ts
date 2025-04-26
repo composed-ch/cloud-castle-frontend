@@ -31,20 +31,19 @@ export class VmCardComponent {
 
   start() {
     this.vmService.start(this.vm.id).subscribe(() => {
-      console.log(`Start command sent for ${this.vm.name}`);
+      this.sync();
     });
   }
 
   stop() {
     this.vmService.stop(this.vm.id).subscribe(() => {
-      console.log(`Stop command sent for ${this.vm.name}`);
+      this.sync();
     });
   }
 
   sync() {
-    this.vmService.sync(this.vm.id).subscribe((data: any) => {
-      console.log(`VM state synced for ${this.vm.name}`, data);
-      this.vm = mapVm(data);
+    this.vmService.sync(this.vm.id).subscribe((response) => {
+      this.vm.state = response.state;
     });
   }
 }
