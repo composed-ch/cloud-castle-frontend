@@ -1,0 +1,9 @@
+- [x] send token with request
+- [x] Login failed modal instead of alert
+- [x] Show password option
+- [x] GET instances request
+- [x] add /start, /stop & /state in service
+- [x] environment for backend url
+- [ ] spinner after start / stop
+- [ ] sync / reload state periodically?
+- [x] show username when logged in
