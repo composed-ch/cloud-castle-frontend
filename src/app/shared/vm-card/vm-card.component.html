@@ -1,6 +1,8 @@
 <mat-card class="vm-card">
   <mat-card-header>
-    <mat-card-title>{{ vm.name }}</mat-card-title>
+    <mat-card-title matTooltip="{{ getLabelsTooltip(vm) }}" matTooltipClass="multiline-tooltip">
+      {{ vm.name }}
+    </mat-card-title>
     <mat-card-subtitle>IP: {{ vm.ip }}</mat-card-subtitle>
   </mat-card-header>
 
