@@ -1,10 +1,12 @@
 <mat-toolbar color="primary">
   <span class="title">Composed Cloud Castle 0.1</span>
   <span class="spacer"></span>
-
   <span class="username" *ngIf="auth.username">Logged in as <em>{{ auth.username }}</em></span>
-  <mat-divider [vertical]="true"></mat-divider>
   <button *ngIf="auth.isLoggedIn()" mat-button (click)="logout()">Logout</button>
+  <mat-button-toggle-group [value]="currentLang" (change)="switchLanguage($event.value)" exclusive>
+    <mat-button-toggle value="en">EN</mat-button-toggle>
+    <mat-button-toggle value="de">DE</mat-button-toggle>
+  </mat-button-toggle-group>
 </mat-toolbar>
 
 <main class="content">

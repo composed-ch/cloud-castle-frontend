@@ -1,0 +1,9 @@
+{
+    "LOGIN": "Login",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "DASHBOARD_TITLE": "My VMs",
+    "START": "Start",
+    "STOP": "Stop",
+    "SYNC": "Sync"
+}

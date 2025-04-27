@@ -7,62 +7,79 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { VmService } from '../../core/services/vm.service';
 import { Vm } from '../../core/models/vm.model';
 import { State } from '../../core/models/state.enum';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-vm-card',
   standalone: true,
   imports: [
     CommonModule,
+    TranslateModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatChipsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './vm-card.component.html',
   styleUrls: ['./vm-card.component.css']
 })
 export class VmCardComponent {
   @Input() vm!: Vm;
-
+  pollingAction: 'start' | 'stop' | null = null;
   constructor(private vmService: VmService) { }
 
   start() {
-    this.vmService.start(this.vm.id).subscribe(() => {
-      this.pollVmState();
+    this.pollingAction = 'start';
+    this.vmService.start(this.vm.id).subscribe({
+      next: () => {
+        this.pollVmState();
+      },
+      error: (_err) => {
+        this.pollingAction = null;
+      }
     });
   }
 
   stop() {
-    this.vmService.stop(this.vm.id).subscribe(() => {
-      this.pollVmState();
+    this.pollingAction = 'stop';
+    this.vmService.stop(this.vm.id).subscribe({
+      next: () => {
+        this.pollVmState();
+      },
+      error: (_err) => {
+        this.pollingAction = null;
+      }
     });
   }
 
   sync() {
     this.vmService.sync(this.vm.id).subscribe((response) => {
       this.vm.state = response.state;
+      if (this.isFinalState(this.vm.state)) this.pollingAction = null;
     });
   }
 
   private pollVmState() {
-    const pollSubscription: Subscription = interval(1000).pipe(
-      take(10),
-      switchMap(() => this.vmService.sync(this.vm.id)),
-      takeWhile((response: { state: State; }) => !this.isFinalState(response.state), true)
+    const pollSubscription = interval(2000).pipe(
+      take(120),
+      switchMap(() => this.vmService.sync(this.vm.id))
     ).subscribe({
-      next: (response: { state: State; }) => {
+      next: (response) => {
         this.vm.state = response.state;
-
         if (this.isFinalState(response.state)) {
           pollSubscription.unsubscribe();
+          this.pollingAction = null;
         }
       },
       error: (err) => {
+        console.error(`Polling error ${this.vm.name}`, err);
+        this.pollingAction = null;
         pollSubscription.unsubscribe();
       }
     });

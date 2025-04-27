@@ -1,13 +1,13 @@
-<h2>Login</h2>
+<h2>{{ 'LOGIN' | translate }}</h2>
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
   <mat-form-field appearance="fill">
-    <mat-label>Username</mat-label>
+    <mat-label>{{ 'USERNAME' | translate}}</mat-label>
     <input matInput formControlName="username" required>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
-    <mat-label>Password</mat-label>
+    <mat-label>{{ 'PASSWORD' | translate }}</mat-label>
     <input matInput required [type]="showPassword ? 'text' : 'password'" formControlName="password">
     <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()"
       [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="!showPassword">
@@ -16,6 +16,6 @@
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
-    Login
+    {{ 'LOGIN' | translate }}
   </button>
 </form>

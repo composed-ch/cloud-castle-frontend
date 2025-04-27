@@ -4,12 +4,15 @@ import { VmService } from '../../core/services/vm.service';
 import { VmCardComponent } from '../../shared/vm-card/vm-card.component';
 import { Vm } from '../../core/models/vm.model';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-dashboard-page',
   standalone: true,
   imports: [
     CommonModule,
+    TranslateModule,
     VmCardComponent,
     MatSlideToggleModule
   ],

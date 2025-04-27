@@ -8,11 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service'
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-page',
   imports: [
     CommonModule,
+    TranslateModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -30,8 +32,7 @@ export class LoginPageComponent {
     private fb: FormBuilder,
     private router: Router,
     private auth: AuthService,
-    private snackBar: MatSnackBar
-  ) {
+    private snackBar: MatSnackBar) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]

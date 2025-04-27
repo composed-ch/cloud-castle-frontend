@@ -6,7 +6,7 @@
     <mat-card-subtitle>IP: {{ vm.ip }}</mat-card-subtitle>
   </mat-card-header>
 
-  <img mat-card-image src="images/terminal.svg" alt="Terminal Icon" class="card-image" />
+  <img mat-card-image src="assets/images/terminal.svg" alt="Terminal Icon" class="card-image" />
 
   <mat-card-content>
     <mat-chip [ngClass]="vm.state.toLocaleLowerCase()">
@@ -15,13 +15,25 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-icon-button matTooltip="Start VM" aria-label="Start VM" (click)="start()">
-      <mat-icon>play_arrow</mat-icon>
+    <button mat-icon-button matTooltip="{{ 'START' | translate }}" aria-label="Start VM" (click)="start()"
+      [disabled]="pollingAction === 'start'">
+      <ng-container *ngIf="pollingAction !== 'start'; else loading">
+        <mat-icon>play_arrow</mat-icon>
+      </ng-container>
+      <ng-template #loading>
+        <mat-progress-spinner diameter="24" mode="indeterminate" color="primary" [strokeWidth]="3">
+        </mat-progress-spinner>
+      </ng-template>
     </button>
-    <button mat-icon-button matTooltip="Stop VM" aria-label="Stop VM" (click)="stop()">
-      <mat-icon>stop</mat-icon>
+
+    <button mat-icon-button matTooltip="{{ 'STOP' | translate }}" aria-label="Stop VM" (click)="stop()"
+      [disabled]="pollingAction === 'stop'">
+      <ng-container *ngIf="pollingAction !== 'stop'; else loading">
+        <mat-icon>stop</mat-icon>
+      </ng-container>
     </button>
-    <button mat-icon-button matTooltip="Sync VM state" aria-label="Sync VM state" (click)="sync()">
+
+    <button mat-icon-button matTooltip="{{ 'SYNC' | translate }}" aria-label="Sync VM" (click)="sync()">
       <mat-icon>sync</mat-icon>
     </button>
   </mat-card-actions>

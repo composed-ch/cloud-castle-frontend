@@ -1,0 +1,9 @@
+{
+    "LOGIN": "Anmelden",
+    "USERNAME": "Benutzername",
+    "PASSWORD": "Passwort",
+    "DASHBOARD_TITLE": "Meine VMs",
+    "START": "VM starten",
+    "STOP": "VM stoppen",
+    "SYNC": "Synchronisieren"
+}
