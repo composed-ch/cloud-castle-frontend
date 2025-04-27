@@ -17,23 +17,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   styleUrls: ['./dashboard-page.component.css']
 })
 export class DashboardPageComponent implements OnInit {
-  simulateRequest = true;
   vms: Vm[] = [];
 
   constructor(private vmService: VmService) { }
 
   ngOnInit() {
-    this.loadVms();
-  }
-
-  loadVms() {
-    this.vmService.getVms(this.simulateRequest).subscribe(data => {
+    this.vmService.getVms().subscribe(data => {
       this.vms = data;
     });
   }
 
-  toggleDataSource() {
-    this.simulateRequest = !this.simulateRequest;
-    this.loadVms();
-  }
 }

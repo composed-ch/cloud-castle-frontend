@@ -1,10 +1,5 @@
 <h2>My Virtual Machines</h2>
 
-<mat-slide-toggle (change)="toggleDataSource()" [checked]="simulateRequest">
-  Use test data
-</mat-slide-toggle>
-
-
 <div class="dashboard-container">
   <app-vm-card *ngFor="let vm of vms" [vm]="vm"></app-vm-card>
 </div>

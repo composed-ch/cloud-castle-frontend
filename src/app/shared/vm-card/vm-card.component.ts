@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Subscription, interval, take, takeWhile, switchMap } from 'rxjs';
+
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,7 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { VmService } from '../../core/services/vm.service';
 import { Vm } from '../../core/models/vm.model';
-import { mapVm } from '../../core/mappers/vm.mapper';
+import { State } from '../../core/models/state.enum';
 
 @Component({
   selector: 'app-vm-card',
@@ -31,13 +33,13 @@ export class VmCardComponent {
 
   start() {
     this.vmService.start(this.vm.id).subscribe(() => {
-      this.sync();
+      this.pollVmState();
     });
   }
 
   stop() {
     this.vmService.stop(this.vm.id).subscribe(() => {
-      this.sync();
+      this.pollVmState();
     });
   }
 
@@ -46,4 +48,29 @@ export class VmCardComponent {
       this.vm.state = response.state;
     });
   }
+
+  private pollVmState() {
+    const pollSubscription: Subscription = interval(1000).pipe(
+      take(10),
+      switchMap(() => this.vmService.sync(this.vm.id)),
+      takeWhile((response: { state: State; }) => !this.isFinalState(response.state), true)
+    ).subscribe({
+      next: (response: { state: State; }) => {
+        this.vm.state = response.state;
+
+        if (this.isFinalState(response.state)) {
+          pollSubscription.unsubscribe();
+        }
+      },
+      error: (err) => {
+        pollSubscription.unsubscribe();
+      }
+    });
+  }
+
+  private isFinalState(state: State): boolean {
+    return state === State.Running || state === State.Stopped || state === State.Error || state === State.Destroyed;
+  }
+
+
 }

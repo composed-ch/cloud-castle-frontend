@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Vm } from '../../core/models/vm.model';
-import { mapVm, mapVms } from '../mappers/vm.mapper';
+import { mapVms } from '../mappers/vm.mapper';
 import { environment } from '../../../environments/environment';
 
-import { vmTestData } from '../../core/testdata/vms';
 import { State } from '../models/state.enum';
 
 @Injectable({ providedIn: 'root' })
@@ -14,7 +13,7 @@ export class VmService {
   constructor(private http: HttpClient) { }
 
   getVms(simulate: boolean = false): Observable<Vm[]> {
-    const data$ = simulate ? of(vmTestData) : this.http.get<any[]>(`${environment.backendUrl}/instances`);
+    const data$ = this.http.get<any[]>(`${environment.backendUrl}/instances`);
     return data$.pipe(
       map(mapVms)
     );

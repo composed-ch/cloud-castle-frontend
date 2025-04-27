@@ -11,8 +11,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<boolean> {
-    console.log(this.url);
-
     return this.http.post<{ token: string }>(this.url, { username, password }).pipe(
       map((response: { token: string; }) => {
         localStorage.setItem('username', username);
@@ -20,7 +18,6 @@ export class AuthService {
         return true;
       }),
       catchError((error: any) => {
-        console.error('Login failed:', error);
         return of(false);
       })
     );
