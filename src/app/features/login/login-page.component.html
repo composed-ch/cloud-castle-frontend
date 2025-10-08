@@ -18,4 +18,8 @@
   <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
     {{ 'LOGIN' | translate }}
   </button>
+
+  <button mat-button type="button" (click)="openResetDialog()" aria-label="Reset password">
+    {{ 'RESET_PASSWORD' | translate }}
+  </button>
 </form>

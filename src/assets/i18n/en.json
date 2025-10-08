@@ -5,5 +5,10 @@
     "DASHBOARD_TITLE": "My VMs",
     "START": "Start",
     "STOP": "Stop",
-    "SYNC": "Sync"
+    "SYNC": "Sync",
+    "RESET_PASSWORD": "Reset password",
+    "CANCEL": "Cancel",
+    "SEND_RESET_LINK": "Send reset link",
+    "EMAIL_SENT": "Email was sent"
+
 }

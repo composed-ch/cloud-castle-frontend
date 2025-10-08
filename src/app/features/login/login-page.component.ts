@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../core/services/auth.service'
 import { TranslateModule } from '@ngx-translate/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ResetPasswordDialogComponent } from '../password-reset/password-reset-dialog.component';
 
 @Component({
   selector: 'app-login-page',
@@ -20,7 +22,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
@@ -32,7 +35,8 @@ export class LoginPageComponent {
     private fb: FormBuilder,
     private router: Router,
     private auth: AuthService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -41,6 +45,10 @@ export class LoginPageComponent {
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+
+  openResetDialog() {
+    this.dialog.open(ResetPasswordDialogComponent, { width: '380px' });
   }
 
   onSubmit(): void {

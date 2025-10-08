@@ -5,5 +5,9 @@
     "DASHBOARD_TITLE": "Meine VMs",
     "START": "VM starten",
     "STOP": "VM stoppen",
-    "SYNC": "Synchronisieren"
+    "SYNC": "Synchronisieren",
+    "RESET_PASSWORD": "Passwort zurücksetzen",
+    "CANCEL": "Abbrechen",
+    "SEND_RESET_LINK": "Link senden",
+    "EMAIL_SENT": "Email wurde gesendet"
 }
