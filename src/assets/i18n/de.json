@@ -1,13 +1,21 @@
 {
     "LOGIN": "Anmelden",
     "USERNAME": "Benutzername",
+    "EMAIL": "Email",
     "PASSWORD": "Passwort",
+    "CONFIRM_PASSWORD": "Passwort bestätigen",
+    "CANCEL": "Abbrechen",
+    "CLOSE": "Schliessen",
     "DASHBOARD_TITLE": "Meine VMs",
     "START": "VM starten",
     "STOP": "VM stoppen",
     "SYNC": "Synchronisieren",
     "RESET_PASSWORD": "Passwort zurücksetzen",
-    "CANCEL": "Abbrechen",
     "SEND_RESET_LINK": "Link senden",
-    "EMAIL_SENT": "Email wurde gesendet"
+    "EMAIL_SENT": "Email wurde gesendet",
+    "PASSWORD_RESET_FAILED": "Passwort konnte nicht zurückgesetzt werden",
+    "BACK_TO_LOGIN": "Zurück zum Login",
+    "REQUIRED": "Feld darf nicht leer sein.",
+    "MUST_CONTAIN_8_UNIQUE_CHARACTERS": "Muss mindestens 8 verschiedene Zeichen enthalten.",
+    "PASSWORDS_DO_NOT_MATCH": "Passwörter stimmen nicht überein."
 }

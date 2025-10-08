@@ -1,14 +1,22 @@
 {
     "LOGIN": "Login",
     "USERNAME": "Username",
+    "EMAIL": "Email",
     "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "Confirm password",
+    "CANCEL": "Cancel",
+    "CLOSE": "Close",
     "DASHBOARD_TITLE": "My VMs",
     "START": "Start",
     "STOP": "Stop",
     "SYNC": "Sync",
     "RESET_PASSWORD": "Reset password",
-    "CANCEL": "Cancel",
     "SEND_RESET_LINK": "Send reset link",
-    "EMAIL_SENT": "Email was sent"
+    "EMAIL_SENT": "Email was sent",
+    "PASSWORD_RESET_FAILED": "Password reset failed",
+    "BACK_TO_LOGIN": "Back to login",
+    "REQUIRED": "This field is required.",
+    "MUST_CONTAIN_8_UNIQUE_CHARACTERS": "Use at least 8 different characters",
+    "PASSWORDS_DO_NOT_MATCH": "Passwords do not match."
 
 }
