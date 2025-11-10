@@ -2,7 +2,9 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withInterceptors, HttpClient } from '@angular/common/http'; import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { provideHttpClient, withInterceptors, HttpClient } from '@angular/common/http';
+import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { unauthorizedInterceptor } from './core/interceptors/unauthorized.interceptor';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
@@ -15,7 +17,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([
-      JwtInterceptor
+      jwtInterceptor,
+      unauthorizedInterceptor
     ])),
     importProvidersFrom(
       TranslateModule.forRoot({
