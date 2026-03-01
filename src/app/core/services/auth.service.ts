@@ -11,6 +11,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string): Observable<boolean> {
+    username = username.toLowerCase();
     return this.http.post<{ token: string }>(this.url, { username, password }).pipe(
       map((response: { token: string; }) => {
         localStorage.setItem('username', username);
