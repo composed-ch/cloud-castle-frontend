@@ -90,9 +90,9 @@ export class VmCardComponent {
   }
 
   getLabelsTooltip(vm: Vm): string {
-    const context = vm.labels.context.replace(/-/g, '‑'); // non-breaking hyphen (U+2011)
-    const group = vm.labels.group.replace(/-/g, '‑');
-    const owner = vm.labels.owner.replace(/-/g, '‑');
+    const context = vm.labels.context?.replace(/-/g, '‑'); // non-breaking hyphen (U+2011)
+    const group = vm.labels.group?.replace(/-/g, '‑');
+    const owner = vm.labels.owner?.replace(/-/g, '‑');
     return `Context: ${context}\nGroup: ${group}\nOwner: ${owner}`;
   }
 }
